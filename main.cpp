@@ -404,7 +404,7 @@ int main( int argc, char **argv)
 			string source;
 			string destination;
 
-			cout << "From what station are you leaving? ";
+			cout << "From what station are you leaving: Red , Green , Blue , Purple, Yellow ?\n";
 			cin >> source;
 
 			//RUN A CHECK ON USER INPUT
@@ -413,7 +413,7 @@ int main( int argc, char **argv)
 				cin >> source;
 			}
 
-			cout << "To what station are you traveling? ";
+			cout << "To what station are you traveling: Red, Green, Blue Purple, Yellow ?\n";
 			cin >> destination;
 
 			//RUN A CHECK ON USER INPUT
