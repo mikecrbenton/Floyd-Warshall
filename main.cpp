@@ -1,3 +1,9 @@
+/* CSC300 Graph Theory Assignment - Shortest Path with Reconstruction
+   Assignment uses 2 text files to run, explanation below code
+   For program to run:
+   Need to update filepath lines 345 (trains.txt) 368 (stations.txt)
+*/
+
 #include <iostream>
 #include <fstream>
 #include <queue>
@@ -337,7 +343,7 @@ int main( int argc, char **argv)
 
 	//OPEN 1ST File------------------------------------------
 	ifstream file;
-	file.open("/home/mikecrbenton/Desktop/graph.txt"); //ORIGINAL PATH FROM ASSIGNMENT
+	file.open("/home/mikecrbenton/Desktop/trains.txt"); //ORIGINAL PATH FROM ASSIGNMENT
 	
 	if(!file.is_open()){
 		cout << "File Error";
@@ -360,7 +366,7 @@ int main( int argc, char **argv)
 
 	//OPEN 2ND FILE---------------------------------------------
 	ifstream file2;
-	file2.open("/home/mikecrbenton/Desktop/names.txt"); //ORIGINAL PATH FROM ASSIGNMENT
+	file2.open("/home/mikecrbenton/Desktop/stations.txt"); //ORIGINAL PATH FROM ASSIGNMENT
 
 	if(!file2.is_open()){
 		cout << "File Error";
@@ -456,4 +462,35 @@ int main( int argc, char **argv)
 
 	return 0;
 }
+
+/*
+Trains.txt
+---------------
+0 Red
+1 Green
+2 Blue
+3 Purple
+4 Yellow
+---------------
+Contains n lines (n corresponding to the number of stations read from the first
+file) where each line contains a number and a name. The number maps a name to
+the identifiers used in the stations.txt file.
+
+
+Stations.txt
+---------------
+5 6
+0 1 7
+3 1 10
+4 3 12
+1 4 12
+4 2 32
+1 2 3
+----------------
+The first line of the file contains two integers indicating the number of stations
+and routes. Following firt line is n (n being equal to the total number of
+routes) lines representing different routes and their associated weights. 
+Ex.
+Line 2 indicates a route from station 0 to station 1 with a weight of 10. 
+*/
 
