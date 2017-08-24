@@ -404,7 +404,7 @@ int main( int argc, char **argv)
 			string source;
 			string destination;
 
-			cout << "From what station are you leaving: Red , Green , Blue , Purple, Yellow ?\n";
+			cout << "\nFrom what station are you leaving: Red , Green , Blue , Purple, Yellow ?\n";
 			cin >> source;
 
 			//RUN A CHECK ON USER INPUT
@@ -413,7 +413,7 @@ int main( int argc, char **argv)
 				cin >> source;
 			}
 
-			cout << "To what station are you traveling: Red, Green, Blue Purple, Yellow ?\n";
+			cout << "\nTo what station are you traveling: Red, Green, Blue Purple, Yellow ?\n";
 			cin >> destination;
 
 			//RUN A CHECK ON USER INPUT
@@ -436,12 +436,14 @@ int main( int argc, char **argv)
 				mainMtrx.printMatrix();
 				cout << "There is a route between " << source << " and " << destination << " with a minimum distance of " << minRoute << " miles." << endl;
 				mainMtrx.printPath(source, destination);
+				cout << endl;
 				choice = 1;
 			}
 			else{
 
 				mainMtrx.printMatrix();
 				cout << "There is no route between " << source << " and " << destination << endl;
+				cout << endl;
 				choice = 1;
 			}
 		}
