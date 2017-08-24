@@ -10,10 +10,10 @@ using namespace std;
 
 class Graph{
 
-	int station;                // VERTICES
-	int route;                  // EDGES
-	int weight;                 // WEIGHTED-DIRECTED GRAPH
-	int **myMatrix; 			// 2D ARRAY FOR IF ROUTE
+	int station;                	// VERTICES
+	int route;                  	// EDGES
+	int weight;                 	// WEIGHTED-DIRECTED GRAPH
+	int **myMatrix; 		// 2D ARRAY FOR IF ROUTE
 	int **floydMatrix;  		// 2D ARRAY FOR SHORTEST PATH
 	int **reconstructMatrix;	// 2D ARRAY FOR PATH RECONSTRUCTION 
 	string *stationColors;  	// ARRAY FOR NAMES OF COLORS
@@ -28,10 +28,10 @@ class Graph{
 	void printMatrix();
 	void addRoute(int from, int to, int weight);
 	bool isRoute(int from, int to);                 
-	void deleteMatrix();							// DELETES ALL THE ALLOCATED ARRAYS FROM THE CLASS
+	void deleteMatrix();				// DELETES ALL THE ALLOCATED ARRAYS FROM THE CLASS
 	void calcShortestRoutes();                      // RUN THE F-W ALGORITHM
-	int shortestRoute(string src, string dst);		// RETURN SHORTEST ROUTE FROM THE FLOYD-WARSHALL MATRIX
-	bool checkColors(string src); 					// CHECK IF THE COLORS ARE LEGITMATE ENTRIES
+	int shortestRoute(string src, string dst);	// RETURN SHORTEST ROUTE FROM THE FLOYD-WARSHALL MATRIX
+	bool checkColors(string src); 			// CHECK IF THE COLORS ARE LEGITMATE ENTRIES
 	void printPath(string src, string dst);         // PRINT PATH FROM RECONSTRUCTION MATRIX
 
 	//GETTERS AND SETTERS
@@ -272,10 +272,8 @@ void Graph::printPath(string src, string dst)
 		 if( i < trainPath.size() - 1){
 
 		 		cout << "->" ;  
-		 }
-		 	
+		 }		 	
 	}
-
 	cout << endl;
 }
 
@@ -339,7 +337,7 @@ int main( int argc, char **argv)
 
 	//OPEN 1ST File------------------------------------------
 	ifstream file;
-	file.open("/home/mikecrbenton/Desktop/graph.txt");
+	file.open("/home/mikecrbenton/Desktop/graph.txt"); //ORIGINAL PATH FROM ASSIGNMENT
 	
 	if(!file.is_open()){
 		cout << "File Error";
@@ -362,7 +360,7 @@ int main( int argc, char **argv)
 
 	//OPEN 2ND FILE---------------------------------------------
 	ifstream file2;
-	file2.open("/home/mikecrbenton/Desktop/names.txt");
+	file2.open("/home/mikecrbenton/Desktop/names.txt"); //ORIGINAL PATH FROM ASSIGNMENT
 
 	if(!file2.is_open()){
 		cout << "File Error";
