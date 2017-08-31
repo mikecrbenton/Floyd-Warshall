@@ -6,14 +6,14 @@ Data structures graph project consisting of 3 assignments(Determining Paths, Sho
 
 main.cpp reads from 2 files ( trains.txt, stations.txt)
 
-### stations.txt
+### stations.txt - number and color representing the train at each station
 * 0 Red
 * 1 Green
 * 2 Blue
 * 3 Purple
 * 4 Yellow
 
-### trains.txt
+### trains.txt - description below
 * 5 6    // The 1st number(5)represents the number of trains, the 2nd number(6) represents the number of routes 
 * 0 1 7  // Route 1 - There is a route from 0(Red) to 1(Green) with a weight of 7
 * 3 1 10  // Route 2 - There is route from 3(Purple) to 1(Green) with a weight of 10
