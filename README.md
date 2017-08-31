@@ -40,7 +40,7 @@ Floyd-Warshall all-pairs shortest path algorithm to determine the shortest route
 between two stations.
 
 #### Assignment 3: Path Reconstruction
-This will be a continuation of assignment 7. The final problem we will be looking to
+This will be a continuation of assignment 2. The final problem we will be looking to
 solve is path reconstruction. Our code is capable of determining what the shortest
 path is between two stations, but it can’t tell us what routes we need to take. We will
 write some code to do this for us. 
