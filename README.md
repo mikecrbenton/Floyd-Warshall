@@ -8,13 +8,13 @@ main.cpp reads from 2 files ( trains.txt, stations.txt)
 
 trains.txt
 
-5 6    // The first number(5) 
-0 1 7
-3 1 10
-4 3 12
-1 4 12
-4 2 32
-1 2 3
+* 5 6    // The first number(5) 
+* 0 1 7
+* 3 1 10
+* 4 3 12
+* 1 4 12
+* 4 2 32
+* 1 2 3
 
 #### Determining Paths
 
