@@ -6,17 +6,17 @@ Data structures graph project consisting of 3 assignments(Determining Paths, Sho
 
 main.cpp reads from 2 files ( trains.txt, stations.txt)
 
-trains.txt
+stations.txt
 
-* 5 6    // The first number(5) 
-* 0 1 7
-* 3 1 10
-* 4 3 12
-* 1 4 12
-* 4 2 32
-* 1 2 3
+* 5 6    // The 1st number(5)represents the number of trains, the 2nd number(6) represents the number of routes 
+* 0 1 7  // Route 1 - There is a route from 0(Red) to 1(Green) with a weight of 7
+* 3 1 10  // Route 2 - There is route from 3(Purple) to 1(Green) with a weight of 10
+* 4 3 12  // Route 3
+* 1 4 12  // Route 4
+* 4 2 32  // Route 5
+* 1 2 3   // Route 6
 
-#### Determining Paths
+#### Assignment 1: Determining Paths
 
 The first problem to solve is determining if a path exists between two stations.
 We’ve covered how to do this using breadth first search and an adjacency list. But an
