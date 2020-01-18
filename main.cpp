@@ -1,7 +1,7 @@
 /* CSC300 Graph Theory Assignment - Shortest Path with Reconstruction
    Assignment uses 2 text files to run, explanation below code
    For program to run:
-   Need to update filepath lines 345 (trains.txt) 368 (stations.txt)
+   User will need to update filepath lines 345 (trains.txt) 368 (stations.txt)
 */
 
 #include <iostream>
@@ -109,7 +109,6 @@ void Graph::printMatrix(){
 		{	
 			cout << setw(2) << myMatrix[i][j] << "  ";
 		}
-
 		cout << endl;
 	}
 
@@ -121,7 +120,6 @@ void Graph::printMatrix(){
 		{	
 			cout << setw(2) << floydMatrix[i][j] << "  ";
 		}
-
 		cout << endl;
 	}
 
@@ -133,7 +131,6 @@ void Graph::printMatrix(){
 		{	
 			cout << setw(2) << reconstructMatrix[i][j] << "  ";
 		}
-
 		cout << endl;
 	}
 	cout << endl; 
@@ -173,8 +170,7 @@ bool Graph::isRoute(int from, int to)
 		cout << "Checking " << currentInQueue << endl;				
 
 		for(int temp = 0; temp < station ; temp++)
-		{
-			
+		{			
 			//CHECK FOR 0 (empty nodes) SKIP IF 0
 			if(myMatrix[currentInQueue][temp] != 0){       
 															  
@@ -192,11 +188,9 @@ bool Graph::isRoute(int from, int to)
 					//ADD TO QUEUE
 					vertices.push(temp);                    
 				}
-
 			}
 		}
 	}
-
 	return isPath;
 }
 
@@ -216,7 +210,6 @@ void Graph::calcShortestRoutes(){
 					reconstructMatrix[i][j] = reconstructMatrix[i][k];  //RECONSTRUCTION MATRIX
 
 				}
-
 				//PREVIOUS CODE- ALTERNATE WAY 
 				//if(i == j) continue;
 				//floydMatrix[i][j]= min( floydMatrix[i][j], (floydMatrix[i][k] + floydMatrix[k][j]) );
@@ -231,7 +224,6 @@ int Graph::shortestRoute(string src, string dst)
 	int b = getStationId(dst);
 
 	return floydMatrix[a][b];  
-
 }
 
 bool Graph::checkColors(string src)
@@ -328,19 +320,16 @@ void Graph::deleteMatrix()
 	for( int i=0 ; i < station ; i++ ){
 		delete reconstructMatrix[i];
 	}
-
 	delete reconstructMatrix;
-
 
 	delete[] stationColors;
 	stationColors = NULL;
 
 }
 //----------------------------------------------------
-
+//---------------------MAIN---------------------------
 int main( int argc, char **argv)
 {
-
 	//OPEN 1ST File------------------------------------------
 	ifstream file;
 	file.open("/home/mikecrbenton/Desktop/trains.txt"); //ORIGINAL PATH FROM ASSIGNMENT
@@ -384,7 +373,7 @@ int main( int argc, char **argv)
 
 	/* ONCE THE GRAPH BEING USED FOR THE FLOYD-WARSHALL ALGORITHM
 	   HAS BEEN INITIALIZED( IN CONSTRUCTOR ) THE ALGORITHM NEEDS
-	   TO BE RUN TO PRODUCE THE CORRECT  */
+	   TO BE RUN TO PRODUCE CORRECT INFO  */
 	mainMtrx.calcShortestRoutes();
 
 	int choice = 1; //INITIALIZE TO ENTER WHILE LOOP
