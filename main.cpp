@@ -15,7 +15,6 @@
 using namespace std;
 
 class Graph{
-
 	int station;                	// VERTICES
 	int route;                  	// EDGES
 	int weight;                 	// WEIGHTED-DIRECTED GRAPH
@@ -30,7 +29,6 @@ class Graph{
 
 	//CONSTRUCTOR
 	Graph(int stations, int routes);
-
 	void printMatrix();
 	void addRoute(int from, int to, int weight);
 	bool isRoute(int from, int to);                 
@@ -49,20 +47,17 @@ class Graph{
 
 Graph::Graph(int stations, int routes){
 
-	//ARRAY FOR THE STATION NAMES (DYNAMICALLY SIZED) 
+	// ARRAY FOR THE STATION NAMES (DYNAMICALLY SIZED) 
 	stationColors = new string[stations]; 
-
 	station = stations;
 	route = routes; 
 
 	myMatrix = new int* [station];
 
-	for(int i = 0; i<station; i++)
-	{
+	for(int i = 0; i<station; i++){
 		myMatrix[i] = new int[station];
 
-		for(int j = 0; j < station; j++)
-		{
+		for(int j = 0; j < station; j++){
 			myMatrix[i][j] = 0;  
 		}						
 	}
@@ -70,43 +65,37 @@ Graph::Graph(int stations, int routes){
 	/* INITIALIZE A SECOND MATRIX FOR FLOYD WARSHALL
 	   THIS IS A COPY TO RUN THE ALGORITHM ON AND
 	   ALLOW THE 1ST MATRIX TO RETAIN ITS INFORMATION */
+
 	floydMatrix = new int* [station];
 
-	for(int i = 0; i<station; i++)
-	{
+	for(int i = 0; i<station; i++){
 		floydMatrix[i] = new int[station];
 
-		for(int j = 0; j < station; j++)
-		{
+		for(int j = 0; j < station; j++){
 			floydMatrix[i][j] = infi; //infi = 99
 		}
 	}  
 
-	// INITIALIZE A THRID MATRIX TO BE USED
-	// FOR PATH RECONSTRUCTION
+	/* INITIALIZE A THRID MATRIX TO BE USED
+	   FOR PATH RECONSTRUCTION  */
+
 	reconstructMatrix = new int* [station];
 
-	for(int i = 0; i<station; i++)
-	{
+	for(int i = 0; i<station; i++){
 		reconstructMatrix[i] = new int[station];
 
-		for(int j = 0; j < station; j++)
-		{
+		for(int j = 0; j < station; j++){
 			reconstructMatrix[i][j] = -1; 
 		}
 	}  
-
-
 }
 
 void Graph::printMatrix(){
 
 	cout << "-----Adjacency Matrix-----" << endl;
 
-	for(int i = 0; i < station; i++)
-	{
-		for(int j = 0; j < station; j++)
-		{	
+	for(int i = 0; i < station; i++){
+		for(int j = 0; j < station; j++){	
 			cout << setw(2) << myMatrix[i][j] << "  ";
 		}
 		cout << endl;
@@ -114,10 +103,8 @@ void Graph::printMatrix(){
 
 	cout << "-----Floyd-Warshall Matrix-----" << endl;
 
-	for(int i = 0; i < station; i++)
-	{
-		for(int j = 0; j < station; j++)
-		{	
+	for(int i = 0; i < station; i++){
+		for(int j = 0; j < station; j++){	
 			cout << setw(2) << floydMatrix[i][j] << "  ";
 		}
 		cout << endl;
@@ -125,10 +112,8 @@ void Graph::printMatrix(){
 
 	cout << "-----Reconstruction Matrix-----" << endl;
 
-	for(int i = 0; i < station; i++)
-	{
-		for(int j = 0; j < station; j++)
-		{	
+	for(int i = 0; i < station; i++){
+		for(int j = 0; j < station; j++){	
 			cout << setw(2) << reconstructMatrix[i][j] << "  ";
 		}
 		cout << endl;
@@ -138,11 +123,8 @@ void Graph::printMatrix(){
 
 // ADDS THE ROUTES TO BOTH THE ADJACENCY MATRIX & FLOYD-WARSHALL MATRIX
 void Graph::addRoute(int from, int to, int weight){
-
 	myMatrix[from][to] = weight; 
-
 	floydMatrix[from][to] = weight;
-
 	reconstructMatrix[from][to] = to;  
 }
 
@@ -160,32 +142,26 @@ bool Graph::isRoute(int from, int to)
 	visited[from] = true;  // MARK START INDEX AS VISITED
 	vertices.push(from);   // ADD START INDEX TO QUEUE TO ENTER LOOP
 
-	while(!vertices.empty() && isPath == false )
-	{
+	while(!vertices.empty() && isPath == false ){
 		int currentInQueue;
-
 		currentInQueue = vertices.front();                  
 		vertices.pop();										
 
 		cout << "Checking " << currentInQueue << endl;				
 
-		for(int temp = 0; temp < station ; temp++)
-		{			
+		for(int temp = 0; temp < station ; temp++){			
 			//CHECK FOR 0 (empty nodes) SKIP IF 0
-			if(myMatrix[currentInQueue][temp] != 0){       
-															  
+			if(myMatrix[currentInQueue][temp] != 0){       													  
 				//IF THIS NODE IS THE NUMBER WE ARE LOOKING FOR
-				if(temp == to)
-				{
+				if(temp == to){
 					isPath = true;
 					break;
 				}
 				//THIS IS NOT THE NODE BUT HAS THIS NODE BEEN VISITED?
 				if(visited[temp] == false){ 				  
-
-					//MARK AS VISITED
+					// MARK AS VISITED
 					visited[temp] = true;				    
-					//ADD TO QUEUE
+					// ADD TO QUEUE
 					vertices.push(temp);                    
 				}
 			}
@@ -199,16 +175,11 @@ void Graph::calcShortestRoutes(){
 	int i,j,k;
 
 	for(k = 0; k < station; k++){
-
 		for(i = 0; i < station; i++){
-
-			for(j = 0; j < station; j++){
-				
+			for(j = 0; j < station; j++){		
 				if(floydMatrix[i][j] > floydMatrix[i][k] + floydMatrix[k][j]){
-
 					floydMatrix[i][j] = floydMatrix[i][k] + floydMatrix[k][j];
 					reconstructMatrix[i][j] = reconstructMatrix[i][k];  //RECONSTRUCTION MATRIX
-
 				}
 				//PREVIOUS CODE- ALTERNATE WAY 
 				//if(i == j) continue;
@@ -218,18 +189,15 @@ void Graph::calcShortestRoutes(){
 	}
 }
 
-int Graph::shortestRoute(string src, string dst)
-{
+int Graph::shortestRoute(string src, string dst){
 	int a = getStationId(src);
 	int b = getStationId(dst);
 
 	return floydMatrix[a][b];  
 }
 
-bool Graph::checkColors(string src)
-{
+bool Graph::checkColors(string src){
 	for( int i = 0; i < station; i++ ){ 
-
 		if(stationColors[i] == src ){
 			return true;
 		}
@@ -237,8 +205,7 @@ bool Graph::checkColors(string src)
 	return false;
 }
 
-void Graph::printPath(string src, string dst)
-{
+void Graph::printPath(string src, string dst){
 	/*  We are passing in strings.  These need to be converted to
 	    ints.  The getStationId() function will accomplish this */
 	int a = getStationId(src);
@@ -247,15 +214,13 @@ void Graph::printPath(string src, string dst)
 	// the trainPath vector is initialized with 1 node to begin
 	trainPath = vector<int>(1,0); 
 
-	if(reconstructMatrix[a][b] == -1)
-	{
+	if(reconstructMatrix[a][b] == -1){
 		return; //?
 	}
 
 	trainPath[0] = a; // Initialize the first node
 
 	while( a != b ){
-		
 		a = reconstructMatrix[a][b];
 		trainPath.push_back(a);
 	}
@@ -263,58 +228,48 @@ void Graph::printPath(string src, string dst)
 	cout << "Your path will be ";
 
 	for( int i = 0 ; i < trainPath.size() ; i++ ){
-
 		cout << getStationColors( trainPath[i] );
 
 		 // DONT PRINT AN ARROW IF IT IS THE LAST NODE
 		 if( i < trainPath.size() - 1){
-
-		 		cout << "->" ;  
+			cout << "->" ;  
 		 }		 	
 	}
 	cout << endl;
 }
 
-int Graph::getStationId(string color)
-{
-	int id = 0; //ID STARTS AT O FOR INDEX[0] IN ARRAY
+int Graph::getStationId(string color){
+	int id = 0; // ID STARTS AT O FOR INDEX[0] IN ARRAY
 
 	for( int i = 0; i < station; i++ ){  
-
 		if(stationColors[i] == color){
 			return id;
 		}
 		//INCREMENT ONLY IF NOT OUT OF BOUNDS OF ARRAY SIZE
-		if(id < station)
-		{
+		if(id < station){
 			id++; 
 		}
 	}
 }
 
 string Graph::getStationColors(int id){
-
 	return stationColors[id];
 }
 
 void Graph::setStationColors(int id, string color){
-
 	stationColors[id] = color;
 }
 
 //NEED TO DELETE DYNAMICALLY ALLOCATED MEMORY!
-void Graph::deleteMatrix()
-{
+void Graph::deleteMatrix(){
 	for( int i=0 ; i < station ; i++ ){
 		delete myMatrix[i];
 	}
-
 	delete myMatrix;
 
 	for( int i=0 ; i < station ; i++ ){
 		delete floydMatrix[i];
 	}
-
 	delete floydMatrix;
 
 	for( int i=0 ; i < station ; i++ ){
@@ -324,13 +279,11 @@ void Graph::deleteMatrix()
 
 	delete[] stationColors;
 	stationColors = NULL;
-
 }
-//----------------------------------------------------
-//---------------------MAIN---------------------------
-int main( int argc, char **argv)
-{
-	//OPEN 1ST File------------------------------------------
+
+//=====================MAIN========================
+int main( int argc, char **argv){
+	//OPEN 1ST File----------------------------
 	ifstream file;
 	file.open("/home/mikecrbenton/Desktop/trains.txt"); //ORIGINAL PATH FROM ASSIGNMENT
 	
@@ -348,12 +301,11 @@ int main( int argc, char **argv)
 	Graph mainMtrx = Graph(afile,bfile);
 
 	while (file >> afile >> bfile >> cfile ){
-
 		mainMtrx.addRoute(afile, bfile, cfile );
 		//cout<< afile << " " << bfile << " " << cfile << endl;
 	}
 
-	//OPEN 2ND FILE---------------------------------------------
+	//OPEN 2ND FILE-----------------------------
 	ifstream file2;
 	file2.open("/home/mikecrbenton/Desktop/stations.txt"); //ORIGINAL PATH FROM ASSIGNMENT
 
@@ -366,7 +318,6 @@ int main( int argc, char **argv)
 	string color;
 	
 	while ( file2 >> num >> color ){
-
 		mainMtrx.setStationColors(num,color);
 		//cout << num << color <<endl;
 	}
@@ -378,10 +329,8 @@ int main( int argc, char **argv)
 
 	int choice = 1; //INITIALIZE TO ENTER WHILE LOOP
 
-	while(choice == 1)
-	{
+	while(choice == 1){
 		cout << "-- Menu --" << endl;
-
 		cout << "     0 -> Exit" << endl;		
 		cout << "     1 -> Print Menu" << endl;
 		cout << "     2 -> Check if path exists" << endl;
@@ -389,13 +338,11 @@ int main( int argc, char **argv)
 
 		cin >> choice;
 
-		if(choice == 0)
-		{
+		if(choice == 0){
 			break;
 		}
 
-		if(choice == 2)
-		{
+		if(choice == 2){
 			string source;
 			string destination;
 
@@ -417,14 +364,12 @@ int main( int argc, char **argv)
 				cin >> destination;
 			}
 			
-
 			//INTEGERS TO STORE SRC AND DST FOR GRAPH
 			int a = mainMtrx.getStationId(source);
 			int b = mainMtrx.getStationId(destination);
 
 			//IF THERE IS A ROUTE 
 			if( mainMtrx.isRoute(a,b) ){
-
 				//RUN SHORTEST ROUTE
 				int minRoute = mainMtrx.shortestRoute(source, destination);
 
@@ -435,7 +380,6 @@ int main( int argc, char **argv)
 				choice = 1;
 			}
 			else{
-
 				mainMtrx.printMatrix();
 				cout << "There is no route between " << source << " and " << destination << endl;
 				cout << endl;
@@ -443,7 +387,7 @@ int main( int argc, char **argv)
 			}
 		}
 	}
-
+	
 	mainMtrx.deleteMatrix();
 
 	file.close();
@@ -464,7 +408,6 @@ Trains.txt
 Contains n lines (n corresponding to the number of stations read from the first
 file) where each line contains a number and a name. The number maps a name to
 the identifiers used in the stations.txt file.
-
 
 Stations.txt
 ---------------
